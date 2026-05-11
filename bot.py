@@ -10,7 +10,7 @@ import threading
 
 load_dotenv()
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = os.getenv("8750440327:AAFxwcvS0oxY5iNI6_jNwE48pA6ETGaH3Sw")
 GROUP_ID = os.getenv("GROUP_ID")
 PORT = int(os.getenv("PORT", 10000))
 
