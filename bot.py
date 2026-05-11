@@ -1,20 +1,14 @@
 import re
 import os
 import logging
-from flask import Flask
-from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from telegram.constants import ChatMemberStatus
 
-load_dotenv()
-
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-GROUP_ID = os.getenv("GROUP_ID")
-PORT = int(os.getenv("PORT", 10000))
+BOT_TOKEN = "8614020088:AAHQm6K7W2Il-ubOUxV2QMp3IWSnZFdL2PQ"
+GROUP_ID = "@escrow_only_usdt"
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 def is_valid(text):
     pattern = re.compile(
@@ -44,19 +38,10 @@ async def filter_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except:
             pass
 
-flask_app = Flask(__name__)
-
-@flask_app.route("/")
-def home():
-    return "Bot Running"
-
 def main():
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, filter_msg))
     app.run_polling()
-    logger.info("Bot polling started...")
 
 if __name__ == "__main__":
-    import threading
-    threading.Thread(target=main).start()
-    flask_app.run(host="0.0.0.0", port=PORT)
+    main()
