@@ -1,3 +1,4 @@
+
 import re
 import os
 import logging
@@ -22,7 +23,7 @@ from telegram.constants import ChatMemberStatus
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-GROUP_ID = os.getenv("GROUP_ID", "-1001234567890")
+GROUP_ID = os.getenv("GROUP_ID", "@escrowspartans")
 PORT = int(os.getenv("PORT", 10000))
 
 # =========================
@@ -51,6 +52,20 @@ def is_valid(text: str) -> bool:
     )
 
     return bool(pattern.match(text.strip()))
+
+# =========================
+# ALLOWED SHORT MESSAGES
+# =========================
+ALLOWED_MESSAGES = [
+    "dm",
+    "check dm",
+    "done",
+    "paid",
+    "sent",
+    "ok",
+    "yes",
+    "available",
+]
 
 # =========================
 # TELEGRAM FILTER
@@ -97,16 +112,41 @@ async def filter_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
         logger.error(f"Member check error: {e}")
 
     # =========================
+    # ALLOW SIMPLE REPLIES
+    # =========================
+    text_lower = msg.text.strip().lower()
+
+    if text_lower in ALLOWED_MESSAGES:
+        return
+
+    # =========================
     # DELETE INVALID MESSAGE
     # =========================
     if not is_valid(msg.text):
 
         try:
+
+            # Delete invalid message
             await msg.delete()
 
             logger.info(
                 f"Deleted invalid message from "
                 f"{msg.from_user.username or msg.from_user.first_name}"
+            )
+
+            # Send format help
+            await context.bot.send_message(
+                chat_id=msg.chat_id,
+                text=(
+                    "❌ Invalid post format\n\n"
+                    "Please use this format:\n\n"
+                    "#buying or #selling\n\n"
+                    "Chain: BEP20\n"
+                    "Amount[USDT]: 100\n"
+                    "Amount[INR]: 8700\n"
+                    "Rate[INR/USDT]: 87\n"
+                    "Payment method: UPI"
+                )
             )
 
         except Exception as e:
