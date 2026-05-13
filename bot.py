@@ -148,7 +148,7 @@ async def filter_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     "Amount[USDT]: ?\n"
                     "Amount[INR]: ?\n"
                     "Rate[INR/USDT]: ?\n"
-                    "Payment method: ?"\n"
+                    "Payment method: ?\n"
                     "escrow fee:kiska hoga buyer ya seller? \n"
                 )
             )
