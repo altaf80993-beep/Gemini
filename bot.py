@@ -142,13 +142,13 @@ async def filter_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 text=(
                     "❌ Invalid post format\n\n"
                     "Please use this format:\n\n"
-                    "copy karo aur use karo:\n\n"
+                    "copy and use this format:\n\n"
                     "#buying or #selling\n\n"
                     "Chain: BEP20\n"
                     "Amount[USDT]: ?\n"
                     "Amount[INR]: ?\n"
                     "Rate[INR/USDT]: ?\n"
-                    "Payment method: ?"
+                    "Payment method: ?"\n"
                     "escrow fee:kiska hoga buyer ya seller? \n"
                 )
             )
