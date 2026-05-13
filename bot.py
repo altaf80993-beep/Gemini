@@ -58,6 +58,8 @@ def is_valid(text: str) -> bool:
 # =========================
 ALLOWED_MESSAGES = [
     "dm",
+    " hi", 
+    "hello", 
     "check dm",
     "done",
     "paid",
