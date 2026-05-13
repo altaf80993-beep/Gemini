@@ -142,10 +142,10 @@ async def filter_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     "Please use this format:\n\n"
                     "#buying or #selling\n\n"
                     "Chain: BEP20\n"
-                    "Amount[USDT]: 100\n"
-                    "Amount[INR]: 8700\n"
-                    "Rate[INR/USDT]: 87\n"
-                    "Payment method: UPI"
+                    "Amount[USDT]: ?\n"
+                    "Amount[INR]: ?\n"
+                    "Rate[INR/USDT]: ?\n"
+                    "Payment method: ?"
                 )
             )
 
