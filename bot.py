@@ -375,7 +375,7 @@ async def escrow_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"👤 Buyer: @{buyer_username}\n"
                 f"🆔 Room #{room['room_num']}\n\n"
                 f"⚠️ **IMPORTANT RULES:**\n"
-                f"• ONLY ADMIN {ADMIN USERNAME} can complete or cancel\n"
+                f"• ONLY ADMIN {ADMIN_USERNAME} can complete or cancel\n"
                 f"• Seller CANNOT cancel (USDT is locked with admin)\n"
                 f"• Buyer CANNOT cancel (payment is secure)\n\n"
                 f"📝 **PROCESS:**\n"
