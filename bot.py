@@ -42,13 +42,13 @@ GROUP_ID = GROUP_ID_INPUT
 ROOMS = [
     {
         "room_num": 1,
-        "room_id": -1001234567890,  # 🔁 Replace with Room 1 actual ID (run /getid)
+        "room_id": -1003974490347,  # 🔁 Replace with Room 1 actual ID (run /getid)
         "invite_link": "https://t.me/+_5lw9u-sBM0xY2Jl",  # Your room 1 invite link
         "busy": False
     },
     {
         "room_num": 2,
-        "room_id": -1001234567891,  # 🔁 Replace with Room 2 actual ID (run /getid)
+        "room_id": -1003766531525,  # 🔁 Replace with Room 2 actual ID (run /getid)
         "invite_link": "https://t.me/+FbR1VOqqXqswYjJl",  # Your room 2 invite link
         "busy": False
     },
