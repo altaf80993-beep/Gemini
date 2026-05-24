@@ -45,7 +45,7 @@ ACTIVE_ROOMS: Dict[int, dict] = {}
 ROOMS = [
     {
         "room_num": 1,
-        "room_id": -1003974490347,
+        "room_id": --1003970953090,
         "invite_link": "https://t.me/+_5lw9u-sBM0xY2Jl",
         "busy": False
     },
