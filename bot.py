@@ -267,7 +267,7 @@ async def getid_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     user = msg.from_user
     
-    if user.id != ADMIN_ID:
+    if user.id != ADMIN_ID:@crypto_8099
         await msg.reply_text("❌ Access Denied! Only admin can use this command.")
         return
     
@@ -375,7 +375,7 @@ async def escrow_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"👤 Buyer: @{buyer_username}\n"
                 f"🆔 Room #{room['room_num']}\n\n"
                 f"⚠️ **IMPORTANT RULES:**\n"
-                f"• ONLY ADMIN {ADMIN_USERNAME} can complete or cancel\n"
+                f"• ONLY ADMIN {crypto_8098} can complete or cancel\n"
                 f"• Seller CANNOT cancel (USDT is locked with admin)\n"
                 f"• Buyer CANNOT cancel (payment is secure)\n\n"
                 f"📝 **PROCESS:**\n"
@@ -443,11 +443,11 @@ async def complete_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     escrow = get_active_escrow_by_room(room_id)
 
     if not escrow:
-        await msg.reply_text("❌ No active escrow.")
+        await msg.reply_text("❌ Not allowed only admin can do this.")
         return
     
     # ONLY ADMIN can complete
-    if user.id != ADMIN_ID:
+    if user.id != ADMIN_ID:6722137021
         await msg.reply_text(
             f"❌ **Only Admin {ADMIN_USERNAME} can complete this deal!**\n\n"
             f"Seller (@{escrow['seller_username']}) and Buyer (@{escrow['buyer_username']}) cannot use /complete.\n\n"
