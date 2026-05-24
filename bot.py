@@ -447,7 +447,7 @@ async def complete_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     # ONLY ADMIN can complete
-    if user.id != ADMIN_ID:6722137021/Crypto_8099
+    if user.id != ADMIN_ID:
         await msg.reply_text(
             f"❌ **Only Admin {ADMIN_USERNAME} can complete this deal!**\n\n"
             f"Seller (@{escrow['seller_username']}) and Buyer (@{escrow['buyer_username']}) cannot use /complete.\n\n"
