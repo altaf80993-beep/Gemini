@@ -46,7 +46,7 @@ ROOMS = [
     {
         "room_num": 1,
         "room_id": --1003970953090,
-        "invite_link": "https://t.me/+_5lw9u-sBM0xY2Jl",
+        "invite_link": "https://t.me/+BHJL7ayHNJw3OTE1",
         "busy": False
     },
     {
