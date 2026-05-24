@@ -397,11 +397,10 @@ async def escrow_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"🔗 **Join Link:**\n{invite_link}\n\n"
         f"⚠️ **Beware of Scammers** ⚠️\n\n"
         f"📝 **Important Rules:**\n"
-        f"• ONLY ADMIN {ADMIN_USERNAME} can complete or cancel\n"
-        f"• Seller CANNOT cancel (USDT is locked)\n"
-        f"• Buyer CANNOT cancel (payment is locked)\n"
-        f"• Admin will resolve any disputes\n\n"
-        f"🔗 **Link is permanent - never expires!**"
+        f"• ONLY ADMIN {ADMIN_USERNAME} can CONFIRM THEN SEND YOUR ASSETS\n"
+        f"• DON'T SEND USDT TO BUYER\n\n"
+        f"• DON'T SEND PAYMENT TO SELLER\n\n"
+        f"• without admin confifornation sending any assets admin will not responsible\n"
     )
 
     # Send backup link to seller DM
