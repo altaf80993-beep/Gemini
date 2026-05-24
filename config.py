@@ -1,5 +1,5 @@
 # =========================
-# BOT CONFIGURATION
+# ADMIN CONFIGURATION
 # =========================
 
 # Admin Configuration
