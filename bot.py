@@ -400,10 +400,11 @@ async def escrow_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"• ONLY ADMIN {ADMIN_USERNAME} can CONFIRM THEN SEND YOUR ASSETS\n"
         f"• DON'T SEND USDT TO BUYER\n\n"
         f"• DON'T SEND PAYMENT TO SELLER\n\n"
-        f"• without admin confifornation sending any assets admin will not responsible\n"
+        f"• without admin confifornation sending any assets admin will not responsible for your loss\n"
+
+        
     )
 
-    # Send backup link to seller DM
     try:
         await context.bot.send_message(
             chat_id=seller.id,
