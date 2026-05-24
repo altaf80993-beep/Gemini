@@ -40,7 +40,7 @@ GROUP_ID = GROUP_ID_INPUT
 ROOMS = [
     {
         "room_num": 1,
-        "room_id": -1003974490347,
+        "room_id": -1003970953090,
         "busy": False
     },
     {
@@ -49,7 +49,46 @@ ROOMS = [
         "busy": False
     },
 ]
-
+"room_num": 3,
+        "room_id": -1003917012735,
+        "busy": False
+    },
+]
+"room_num": 4,
+        "room_id": -5156071016,
+        "busy": False
+    },
+]
+"room_num": 5,
+        "room_id": -1003818184802,
+        "busy": False
+    },
+]
+"room_num": 6,
+        "room_id": -1003920088774,
+        "busy": False
+    },
+]
+"room_num": 7,
+        "room_id": -1003962671967,
+        "busy": False
+    },
+]
+"room_num": 8,
+        "room_id": -1003977905208,
+        "busy": False
+    },
+]
+"room_num": 9,
+        "room_id": -1003474572652,
+        "busy": False
+    },
+]
+"room_num": 10,
+        "room_id": -1003992844841,
+        "busy": False
+    },
+]
 # =========================
 # LOGGING
 # =========================
