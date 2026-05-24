@@ -267,7 +267,7 @@ async def getid_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     user = msg.from_user
     
-    if user.id != ADMIN_ID:@crypto_8099
+    if user.id != ADMIN_ID:
         await msg.reply_text("❌ Access Denied! Only admin can use this command.")
         return
     
