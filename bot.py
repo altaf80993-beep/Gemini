@@ -249,43 +249,6 @@ ALLOWED_MESSAGES = [
 ]
 
 # =========================
-# CHECK GROUP MEMBERSHIP
-# =========================
-
-async def is_member_of_group(context: ContextTypes.DEFAULT_TYPE, username: str):
-    """
-    Check if user is member of group using username
-    Returns: (is_member, user_id, error_message)
-    """
-    clean_username = username.lstrip("@").lower()
-    
-    # Step 1: Check in our database first
-    db_user = get_user_by_username(clean_username)
-    
-    if db_user:
-        try:
-            member = await context.bot.get_chat_member(GROUP_ID, db_user['user_id'])
-            if member.status not in [ChatMemberStatus.LEFT, ChatMemberStatus.KICKED]:
-                save_member_info(db_user['user_id'], db_user['username'], member.user.first_name)
-                return (True, db_user['user_id'], None)
-        except:
-            pass
-    
-    # Step 2: Search in group members
-    try:
-        async for member in context.bot.get_chat_members(GROUP_ID, limit=500):
-            if member.user.username and member.user.username.lower() == clean_username:
-                save_member_info(member.user.id, member.user.username, member.user.first_name)
-                return (True, member.user.id, None)
-            if member.user.first_name and member.user.first_name.lower() == clean_username:
-                save_member_info(member.user.id, member.user.username, member.user.first_name)
-                return (True, member.user.id, None)
-    except Exception as e:
-        logger.error(f"Member search error: {e}")
-    
-    return (False, None, f"⚠️ @{username} is not a member of this group!\nPlease ask them to join first.")
-
-# =========================
 # TRACK MEMBERS
 # =========================
 
@@ -368,19 +331,8 @@ async def escrow_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await msg.reply_text(f"❌ @{buyer_username} already has an active escrow deal!")
         return
     
-    # Check group membership
-    is_member, buyer_id, error_msg = await is_member_of_group(context, buyer_username)
-    
-    if not is_member:
-        await msg.reply_text(error_msg)
-        return
-    
     # Get free room
     room = get_free_room()
-    
-    if not room:
-        await msg.reply_text("❌ All escrow rooms are busy! Please try again later.")
-        return
     
     # Store in database
     start_time = time.time()
