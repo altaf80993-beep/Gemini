@@ -131,8 +131,7 @@ def is_admin(user):
 ALLOWED_WORDS = [
     "hi", "hello", "hey", "dm", "check dm", "done", "paid", "sent",
     "received", "ok", "yes", "no", "available", "confirm", "pending",
-    "wait", "waiting", "thanks", "thank you", "welcome", "got it", "okay", "fine",
-    "kon", "kaise", "ho", "kya", "haal", "main", "hu", "mera", "tera", "kese"
+    "wait", "waiting", "thanks", "thank you", "welcome", "got it", "okay", "fine"
 ]
 
 def is_allowed_word(text: str) -> bool:
@@ -216,10 +215,11 @@ async def filter_messages(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 "```\n"
                 "#buying or #selling\n\n"
                 "Chain: BEP20\n"
-                "Amount[USDT]: 100\n"
-                "Amount[INR]: 8500\n"
-                "Rate[INR/USDT]: 85\n"
+                "Amount[USDT]: ?\n"
+                "Amount[INR]: ?\n"
+                "Rate[INR/USDT]: ?\n"
                 "Payment method: Bank/UPI\n"
+                "escrow fee:(buyer Or seller)? \n"
                 "```",
                 parse_mode='Markdown'
             )
