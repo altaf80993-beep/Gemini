@@ -233,12 +233,12 @@ def free_room(room_id):
         if room["room_id"] == room_id:
             room["busy"] = False
             break
-
 # =========================
-# MESSAGE VALIDATION
+# MESSAGE VALIDATION (FIXED)
 # =========================
 
 def is_valid(text: str) -> bool:
+    """Check if message matches buying/selling format"""
     pattern = re.compile(
         r"^(#buying|#selling)\s*[\r\n]+"
         r"Chain:\s*.+[\r\n]+"
@@ -250,7 +250,98 @@ def is_valid(text: str) -> bool:
     )
     return bool(pattern.match(text.strip()))
 
-ALLOWED_MESSAGES = ["dm", "hi", "hello", "check dm", "done", "paid", "sent", "ok", "yes", "available", "/start"]
+# Allowed messages (case insensitive)
+ALLOWED_MESSAGES = [
+    "dm", "hi", "hello", "check dm", "done", 
+    "paid", "sent", "ok", "yes", "available",
+    "/start", "/escrow", "/help", "thank", "thanks",
+    "okay", "fine", "wait", "pending", "confirm"
+]
+
+# =========================
+# MESSAGE FILTER WITH STRICT CHECKING
+# =========================
+
+async def filter_msg(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    msg = update.message
+    if not msg or not msg.text:
+        return
+    
+    # Only check in main group
+    chat = msg.chat
+    user = msg.from_user
+    user_id = user.id
+    
+    # Get main group ID
+    main_group_id = None
+    try:
+        if str(GROUP_ID_INPUT).lstrip('-').isdigit():
+            main_group_id = int(GROUP_ID_INPUT)
+        else:
+            chat_info = await context.bot.get_chat(GROUP_ID_INPUT)
+            main_group_id = chat_info.id
+    except:
+        pass
+    
+    # If not in main group, ignore
+    if chat.id != main_group_id:
+        return
+    
+    # ADMIN bypass - Admin can send anything
+    if user_id == ADMIN_ID:
+        logger.info(f"Admin message allowed: {msg.text[:50]}")
+        return
+    
+    # NOW CHECK MESSAGE FORMAT
+    text = msg.text.strip()
+    text_lower = text.lower()
+    
+    # Check if message is in allowed list
+    if text_lower in ALLOWED_MESSAGES:
+        logger.info(f"Allowed message from {user.username}: {text[:50]}")
+        return
+    
+    # Check if it's a command (starts with /)
+    if text.startswith('/'):
+        # Commands are allowed (like /escrow, /help etc)
+        logger.info(f"Command from {user.username}: {text}")
+        return
+    
+    # Check if it's a buying/selling post
+    if text_lower.startswith(('#buying', '#selling')):
+        if is_valid(text):
+            logger.info(f"Valid trade post from {user.username}")
+            return
+        else:
+            # Invalid format - delete and warn
+            await msg.delete()
+            await msg.reply_text(
+                "❌ **Invalid Trade Post Format!** ❌\n\n"
+                "📝 **Use this exact format:**\n"
+                "```\n"
+                "#buying or #selling\n\n"
+                "Chain: BEP20\n"
+                "Amount[USDT]: 100\n"
+                "Amount[INR]: 8500\n"
+                "Rate[INR/USDT]: 85\n"
+                "Payment method: Bank/UPI\n"
+                "```\n\n"
+                "⚠️ Or use allowed words like: dm, hi, hello, done, paid"
+            )
+            return
+    
+    # ANY OTHER MESSAGE - DELETE IT!
+    await msg.delete()
+    await msg.reply_text(
+        f"❌ **Message Deleted!** ❌\n\n"
+        f"Only trade posts and allowed messages are permitted.\n\n"
+        f"✅ **Allowed:**\n"
+        f"• Trade posts (#buying / #selling format)\n"
+        f"• Commands (/escrow, /start, /help)\n"
+        f"• Basic words: dm, hi, hello, done, paid, ok, yes, available\n\n"
+        f"📝 To post a trade, use the exact format above."
+    )
+    logger.info(f"Deleted unauthorized message from {user.username}: {text[:50]}")
 
 # =========================
 # WELCOME & RESTRICT NEW MEMBERS
